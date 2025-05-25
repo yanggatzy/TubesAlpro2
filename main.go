@@ -19,10 +19,25 @@ type Ide struct {
 var ideas []Ide
 var noID = 1
 
+// var ideas = []Ide{
+// 	{ID: 1, Judul: "Fitur Voting Ide", Kategori: "Fitur", Tanggal: "2025-05-01", Voting: 12},
+// 	{ID: 2, Judul: "Sistem Login", Kategori: "Keamanan", Tanggal: "2025-05-02", Voting: 7},
+// 	{ID: 3, Judul: "Dashboard Statistik", Kategori: "Analitik", Tanggal: "2025-05-03", Voting: 15},
+// 	{ID: 4, Judul: "Kolaborasi Tim", Kategori: "Kolaborasi", Tanggal: "2025-05-04", Voting: 10},
+// 	{ID: 5, Judul: "Export ke PDF", Kategori: "Fitur", Tanggal: "2025-05-05", Voting: 5},
+// 	{ID: 6, Judul: "Notifikasi Email", Kategori: "Komunikasi", Tanggal: "2025-05-06", Voting: 9},
+// 	{ID: 7, Judul: "Integrasi Google Calendar", Kategori: "Integrasi", Tanggal: "2025-05-07", Voting: 6},
+// 	{ID: 8, Judul: "Mode Gelap", Kategori: "Antarmuka", Tanggal: "2025-05-08", Voting: 11},
+// 	{ID: 9, Judul: "Penilaian Ide Otomatis", Kategori: "Kecerdasan Buatan", Tanggal: "2025-05-09", Voting: 14},
+// 	{ID: 10, Judul: "Backup Data Berkala", Kategori: "Keamanan", Tanggal: "2025-05-10", Voting: 8},
+// }
+
+// var noID = 11
+
 func Tambahide() {
 	reader := bufio.NewReader(os.Stdin)
 
-	fmt.Print("Masukkan judul ide: ")
+	fmt.Print("\nMasukkan judul ide: ")
 	judul, _ := reader.ReadString('\n') // misal user input: " Ide Baru\n"
 	judul = strings.TrimSpace(judul)    // hasilnya jadi "Ide Baru" tanpa spasi atau newline
 
@@ -50,7 +65,7 @@ func Tambahide() {
 func EditideByID() {
 	reader := bufio.NewReader(os.Stdin)
 
-	fmt.Print("Masukkan ID ide yang ingin diedit: ")
+	fmt.Print("\nMasukkan ID ide yang ingin diedit: ")
 	var id int
 	fmt.Scanln(&id)
 
@@ -58,7 +73,7 @@ func EditideByID() {
 	for i := range ideas {
 		if ideas[i].ID == id {
 			// Jika ditemukan, input data baru
-			fmt.Print("Masukkan judul baru: ")
+			fmt.Print("\nMasukkan judul baru: ")
 			judul, _ := reader.ReadString('\n')
 			judul = strings.TrimSpace(judul)
 
@@ -75,47 +90,47 @@ func EditideByID() {
 			ideas[i].Kategori = kategori
 			ideas[i].Tanggal = tanggal
 
-			fmt.Println("✅ Ide dengan ID", id, "berhasil diubah. ✏️")
+			fmt.Println("\n✅ Ide dengan ID", id, "berhasil diubah. ✏️")
 			return
 		}
 	}
 
-	fmt.Println("⚠️ Ide dengan ID", id, "tidak ditemukan. ❌")
+	fmt.Println("\n⚠️ Ide dengan ID", id, "tidak ditemukan. ❌")
 }
 
 func HapusideByID() bool {
 	var id int
-	fmt.Print("Masukkan ID ide yang ingin dihapus: ")
+	fmt.Print("\nMasukkan ID ide yang ingin dihapus: ")
 	fmt.Scanln(&id)
 
 	for i := 0; i < len(ideas); i++ {
 		if ideas[i].ID == id {
 			ideas = append(ideas[:i], ideas[i+1:]...)
-			fmt.Printf("✅ Ide dengan ID %d berhasil dihapus. 🗑️\n", id)
+			fmt.Printf("\n✅ Ide dengan ID %d berhasil dihapus. 🗑️\n", id)
 			return true
 		}
 	}
-	fmt.Printf("❌ Ide dengan ID %d tidak ditemukan.🚫\n", id)
+	fmt.Printf("\n❌ Ide dengan ID %d tidak ditemukan.🚫\n", id)
 	return false
 }
 
 func VotingByID() bool {
 	var id, rating int
-	fmt.Print("Masukkan ID ide yang ingin diberi voting: ")
+	fmt.Print("\nMasukkan ID ide yang ingin diberi voting: ")
 	fmt.Scanln(&id)
 
-	fmt.Print("Masukkan nilai voting baru (misal 1-10): ")
+	fmt.Print("Masukkan nilai voting baru (1-100): ")
 	fmt.Scanln(&rating)
 
 	for i := 0; i < len(ideas); i++ {
 		if ideas[i].ID == id {
 			ideas[i].Voting = rating
-			fmt.Printf("✅ Voting ide dengan ID %d berhasil diubah menjadi %d. 👍\n", id, rating)
+			fmt.Printf("\n✅ Voting ide dengan ID %d berhasil diubah menjadi %d. 👍\n", id, rating)
 			return true
 		}
 	}
 
-	fmt.Printf("❌ Ide dengan ID %d tidak ditemukan. 🚫\n", id)
+	fmt.Printf("\n❌ Ide dengan ID %d tidak ditemukan. 🚫\n", id)
 	return false
 }
 
@@ -193,7 +208,7 @@ func UrutkanVotingAscSelection() {
 
 		i = i + 1
 	}
-	fmt.Println("✅ Ide berhasil diurutkan berdasarkan Voting secara ascending. 📈")
+	fmt.Println("\n✅ Ide berhasil diurutkan berdasarkan Voting secara ascending. 📈")
 }
 
 func UrutkanVotingDescSelection() {
@@ -215,7 +230,7 @@ func UrutkanVotingDescSelection() {
 
 		i = i + 1
 	}
-	fmt.Println("✅ Ide berhasil diurutkan berdasarkan Voting secara descending. 📉")
+	fmt.Println("\n✅ Ide berhasil diurutkan berdasarkan Voting secara descending. 📉")
 }
 
 func UrutkanVotingAscInsertion() {
@@ -231,7 +246,7 @@ func UrutkanVotingAscInsertion() {
 		ideas[j] = temp
 		i = i + 1
 	}
-	fmt.Println("✅ Ide berhasil diurutkan berdasarkan voting (ascending) menggunakan Insertion Sort. 📈")
+	fmt.Println("\n✅ Ide berhasil diurutkan berdasarkan voting (ascending) menggunakan Insertion Sort. 📈")
 }
 
 func UrutkanVotingDescInsertion() {
@@ -247,7 +262,7 @@ func UrutkanVotingDescInsertion() {
 		ideas[j] = temp
 		i = i + 1
 	}
-	fmt.Println("✅ Ide berhasil diurutkan berdasarkan voting (descending) menggunakan Insertion Sort. 📉")
+	fmt.Println("\n✅ Ide berhasil diurutkan berdasarkan voting (descending) menggunakan Insertion Sort. 📉")
 }
 
 func UrutkanTanggalAscSelection() {
@@ -265,7 +280,7 @@ func UrutkanTanggalAscSelection() {
 		ideas[idx_min], ideas[i-1] = ideas[i-1], ideas[idx_min]
 		i = i + 1
 	}
-	fmt.Println("✅ Ide berhasil diurutkan berdasarkan tanggal (ascending) menggunakan Selection Sort. 📅⬆️")
+	fmt.Println("\n✅ Ide berhasil diurutkan berdasarkan tanggal (ascending) menggunakan Selection Sort. 📅⬆️")
 }
 
 func UrutkanTanggalDescSelection() {
@@ -283,7 +298,7 @@ func UrutkanTanggalDescSelection() {
 		ideas[idx_max], ideas[i-1] = ideas[i-1], ideas[idx_max]
 		i = i + 1
 	}
-	fmt.Println("✅ Ide berhasil diurutkan berdasarkan tanggal (descending) menggunakan Selection Sort. 📅⬇️")
+	fmt.Println("\n✅ Ide berhasil diurutkan berdasarkan tanggal (descending) menggunakan Selection Sort. 📅⬇️")
 }
 
 func UrutkanTanggalAscInsertion() {
@@ -299,7 +314,7 @@ func UrutkanTanggalAscInsertion() {
 		ideas[j] = temp
 		i = i + 1
 	}
-	fmt.Println("✅ Ide berhasil diurutkan berdasarkan tanggal (ascending) menggunakan Insertion Sort. 📅⬆️")
+	fmt.Println("\n✅ Ide berhasil diurutkan berdasarkan tanggal (ascending) menggunakan Insertion Sort. 📅⬆️")
 }
 
 func UrutkanTanggalDescInsertion() {
@@ -315,7 +330,7 @@ func UrutkanTanggalDescInsertion() {
 		ideas[j] = temp
 		i = i + 1
 	}
-	fmt.Println("✅ Ide berhasil diurutkan berdasarkan tanggal (descending) menggunakan Insertion Sort. 📅⬇️")
+	fmt.Println("\n✅ Ide berhasil diurutkan berdasarkan tanggal (descending) menggunakan Insertion Sort. 📅⬇️")
 }
 
 func UrutkanIDAsc() {
@@ -328,12 +343,12 @@ func UrutkanIDAsc() {
 		}
 		ideas[j] = temp
 	}
-	fmt.Println("✅ Data berhasil diurutkan kembali berdasarkan ID (urutan awal penambahan). 🔄")
+	fmt.Println("\n✅ Data berhasil diurutkan kembali berdasarkan ID (urutan awal penambahan). 🔄")
 }
 
 func TampilkanSemuaIde() {
 	if len(ideas) == 0 {
-		fmt.Println("📭 Belum ada ide yang ditambahkan.")
+		fmt.Println("\n📭 Belum ada ide yang ditambahkan.")
 		return
 	}
 
@@ -353,16 +368,16 @@ func main() {
 	var fitur int
 	for {
 		fmt.Println("\n📋 Menu:")
-		fmt.Println("1️⃣ Tambahkan Ide")
-		fmt.Println("2️⃣ Edit Ide")
-		fmt.Println("3️⃣ Hapus Ide")
-		fmt.Println("4️⃣ Voting Ide")
-		fmt.Println("5️⃣ Cari Ide")
-		fmt.Println("6️⃣ Urutkan Ide Berdasarkan Voting")
-		fmt.Println("7️⃣ Urutan Ide Berdasarkan Tanggal")
-		fmt.Println("8️⃣ Reset Urutan Berdasarkan ID")
-		fmt.Println("9️⃣ Tampilkan Semua Ide")
-		fmt.Println("0️⃣ Keluar")
+		fmt.Println("1️⃣  Tambahkan Ide")
+		fmt.Println("2️⃣  Edit Ide")
+		fmt.Println("3️⃣  Hapus Ide")
+		fmt.Println("4️⃣  Voting Ide")
+		fmt.Println("5️⃣  Cari Ide")
+		fmt.Println("6️⃣  Urutkan Ide Berdasarkan Voting")
+		fmt.Println("7️⃣  Urutan Ide Berdasarkan Tanggal")
+		fmt.Println("8️⃣  Reset Urutan Berdasarkan ID")
+		fmt.Println("9️⃣  Tampilkan Semua Ide")
+		fmt.Println("0️⃣  Keluar")
 		fmt.Print("👉 Pilih menu: ")
 		fmt.Scanln(&fitur)
 
@@ -382,21 +397,21 @@ func main() {
 		case 5:
 			reader := bufio.NewReader(os.Stdin)
 			var metode, tipe int
-			fmt.Println("🔎 Cari berdasarkan:")
-			fmt.Println("1️⃣ ID")
-			fmt.Println("2️⃣ Judul")
+			fmt.Println("\n🔎 Cari berdasarkan:")
+			fmt.Println("1️⃣  ID")
+			fmt.Println("2️⃣  Judul")
 			fmt.Print("👉 Pilih tipe pencarian: ")
 			fmt.Scanln(&tipe)
 
-			fmt.Println("⚙️ Pilih metode pencarian:")
-			fmt.Println("1️⃣ Sequential Search")
-			fmt.Println("2️⃣ Binary Search")
+			fmt.Println("\n⚙️  Pilih metode pencarian:")
+			fmt.Println("1️⃣  Sequential Search")
+			fmt.Println("2️⃣  Binary Search")
 			fmt.Print("👉 Pilih metode: ")
 			fmt.Scanln(&metode)
 
 			switch tipe {
 			case 1:
-				fmt.Print("🆔 Masukkan ID: ")
+				fmt.Print("\n🆔 Masukkan ID: ")
 				var id int
 				fmt.Scanln(&id)
 				var result *Ide
@@ -410,15 +425,15 @@ func main() {
 				}
 
 				if result != nil {
-					fmt.Println("✅ Ide ditemukan:")
-					fmt.Printf("🆔 ID      : %d\n📝 Judul    : %s\n🏷️ Kategori : %s\n📅 Tanggal  : %s\n👍 Voting   : %d\n\n",
+					fmt.Println("\n✅ Ide ditemukan:")
+					fmt.Printf("\n🆔 ID      : %d\n📝 Judul    : %s\n🏷️  Kategori : %s\n📅 Tanggal  : %s\n👍 Voting   : %d\n\n",
 						result.ID, result.Judul, result.Kategori, result.Tanggal, result.Voting)
 				} else {
 					fmt.Println("❌ Ide tidak ditemukan. 😞")
 				}
 
 			case 2:
-				fmt.Print("📝 Masukkan judul ide: ")
+				fmt.Print("\n📝 Masukkan judul ide: ")
 				judul, _ := reader.ReadString('\n')
 				judul = strings.TrimSpace(judul)
 
@@ -433,28 +448,28 @@ func main() {
 				}
 
 				if result != nil {
-					fmt.Println("✅ Ide ditemukan:")
-					fmt.Printf("🆔 ID      : %d\n📝 Judul    : %s\n🏷️ Kategori : %s\n📅 Tanggal  : %s\n👍 Voting   : %d\n\n",
+					fmt.Println("\n✅ Ide ditemukan:")
+					fmt.Printf("\n🆔 ID      : %d\n📝 Judul    : %s\n🏷️ Kategori : %s\n📅 Tanggal  : %s\n👍 Voting   : %d\n\n",
 						result.ID, result.Judul, result.Kategori, result.Tanggal, result.Voting)
 				} else {
-					fmt.Println("❌ Ide tidak ditemukan. 😞")
+					fmt.Println("\n❌ Ide tidak ditemukan. 😞")
 				}
 
 			default:
-				fmt.Println("❗ Pilihan tidak valid. ⚠️")
+				fmt.Println("\n❗ Pilihan tidak valid. ⚠️")
 			}
 
 		case 6:
 			var urutan, metode int
-			fmt.Println("📋 Pilih urutan voting:")
-			fmt.Println("1️⃣ Ascending")
-			fmt.Println("2️⃣ Descending")
+			fmt.Println("\n📋 Pilih urutan voting:")
+			fmt.Println("1️⃣  Ascending")
+			fmt.Println("2️⃣  Descending")
 			fmt.Print("👉 Masukkan pilihan: ")
 			fmt.Scanln(&urutan)
 
-			fmt.Println("🔼 Pilih metode sorting:")
-			fmt.Println("1️⃣ Selection Sort")
-			fmt.Println("2️⃣ Insertion Sort")
+			fmt.Println("\n🔼 Pilih metode sorting:")
+			fmt.Println("1️⃣  Selection Sort")
+			fmt.Println("2️⃣  Insertion Sort")
 			fmt.Print("👉 Masukkan pilihan: ")
 			fmt.Scanln(&metode)
 
@@ -464,7 +479,7 @@ func main() {
 				} else if metode == 2 {
 					UrutkanVotingAscInsertion()
 				} else {
-					fmt.Println("❌ Metode sorting tidak valid. ⚠️")
+					fmt.Println("\n❌ Metode sorting tidak valid. ⚠️")
 				}
 			} else if urutan == 2 {
 				if metode == 1 {
@@ -472,48 +487,48 @@ func main() {
 				} else if metode == 2 {
 					UrutkanVotingDescInsertion()
 				} else {
-					fmt.Println("❌ Metode sorting tidak valid. ⚠️")
+					fmt.Println("\n❌ Metode sorting tidak valid. ⚠️")
 				}
 			} else {
-				fmt.Println("❌ Pilihan urutan tidak valid. ⚠️")
+				fmt.Println("\n❌ Pilihan urutan tidak valid. ⚠️")
 			}
 
 		case 7:
 			var urutan, metode int
-			fmt.Println("📅 Urutkan ide berdasarkan tanggal:")
-			fmt.Println("1️⃣ Gunakan Selection Sort")
-			fmt.Println("2️⃣ Gunakan Insertion Sort")
+			fmt.Println("\n📅 Urutkan ide berdasarkan tanggal:")
+			fmt.Println("1️⃣  Gunakan Selection Sort")
+			fmt.Println("2️⃣  Gunakan Insertion Sort")
 			fmt.Print("👉 Masukkan pilihan metode: ")
 			fmt.Scanln(&metode)
 
-			fmt.Println("🔼 Pilih urutan pengurutan:")
-			fmt.Println("1️⃣ Ascending (dari paling lama)")
-			fmt.Println("2️⃣ Descending (dari paling baru)")
+			fmt.Println("\n🔼 Pilih urutan pengurutan:")
+			fmt.Println("1️⃣  Ascending (dari paling lama)")
+			fmt.Println("2️⃣  Descending (dari paling baru)")
 			fmt.Print("👉 Masukkan pilihan urutan: ")
 			fmt.Scanln(&urutan)
 
 			if metode == 1 {
 				if urutan == 1 {
 					UrutkanTanggalAscSelection()
-					fmt.Println("✅ Berhasil mengurutkan ide berdasarkan tanggal secara ascending 📅⬆️")
+					fmt.Println("\n✅ Berhasil mengurutkan ide berdasarkan tanggal secara ascending 📅⬆️")
 				} else if urutan == 2 {
 					UrutkanTanggalDescSelection()
-					fmt.Println("✅ Berhasil mengurutkan ide berdasarkan tanggal secara descending 📅⬇️")
+					fmt.Println("\n✅ Berhasil mengurutkan ide berdasarkan tanggal secara descending 📅⬇️")
 				} else {
 					fmt.Println("❌ Pilihan urutan tidak valid. ⚠️")
 				}
 			} else if metode == 2 {
 				if urutan == 1 {
 					UrutkanTanggalAscInsertion()
-					fmt.Println("✅ Berhasil mengurutkan ide berdasarkan tanggal secara ascending 📅⬆️")
+					fmt.Println("\n✅ Berhasil mengurutkan ide berdasarkan tanggal secara ascending 📅⬆️")
 				} else if urutan == 2 {
 					UrutkanTanggalDescInsertion()
-					fmt.Println("✅ Berhasil mengurutkan ide berdasarkan tanggal secara descending 📅⬇️")
+					fmt.Println("\n✅ Berhasil mengurutkan ide berdasarkan tanggal secara descending 📅⬇️")
 				} else {
-					fmt.Println("❌ Pilihan urutan tidak valid. ⚠️")
+					fmt.Println("\n❌ Pilihan urutan tidak valid. ⚠️")
 				}
 			} else {
-				fmt.Println("❌ Metode pengurutan tidak valid. ⚠️")
+				fmt.Println("\n❌ Metode pengurutan tidak valid. ⚠️")
 			}
 
 		case 8:
@@ -523,11 +538,11 @@ func main() {
 			TampilkanSemuaIde()
 
 		case 0:
-			fmt.Println("👋 Keluar dari aplikasi. Sampai jumpa! ✨")
+			fmt.Println("\n👋 Keluar dari aplikasi. Sampai jumpa! ✨")
 			return
 
 		default:
-			fmt.Println("❗ Pilihan tidak valid. Silakan coba lagi. 🔄")
+			fmt.Println("\n❗ Pilihan tidak valid. Silakan coba lagi. 🔄")
 		}
 	}
 }
